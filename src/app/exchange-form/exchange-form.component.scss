@@ -1,0 +1,21 @@
+.title {
+    margin: 15px 0;
+    text-align: center;
+}
+.icon {
+ text-align: center;   
+}
+.convert-history {
+    margin-top: 50px;
+    .convert-history-body {
+        max-height: 240px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        p {
+            margin: 0;
+        }
+        span {
+            font-weight: 500;
+        }
+    }
+}

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
+import { GetCurrencyDataService } from './services/get-currency-data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'currExApp';
+  data: any;
+  constructor(
+    private currencyService: GetCurrencyDataService,
+    ) { }
+
+  ngOnInit(changes: SimpleChanges): void {
+    this.getCurrency();
+  }
+
+  getCurrency() {
+    this.currencyService.GetCurrentCurrency().subscribe(
+      res => {
+        this.data = res;
+      },
+      error => {
+      }
+    )
+  }
+
 }

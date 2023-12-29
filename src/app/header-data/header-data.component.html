@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">            
+            <p class="date">{{ actualData?.date | date:'fullDate' }}</p>
+        </div>      
+        <div class="col-6 rates">
+            <p>1 <span>USD</span> - {{ actualData?.rates.UAH | number : '1.2-2' }} <span>UAH</span>, 1 <span>EUR</span> - {{ (actualData?.rates.UAH / actualData?.rates.EUR) | number : '1.2-2' }} <span>UAH</span></p>
+        </div>
+    </div>
+</div>

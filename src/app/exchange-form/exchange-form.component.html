@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 title">            
+            <h3>Currency convertor <i-bs name="currency-exchange"></i-bs></h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5 from">
+            <div class="row">
+                <div class="col-9">                
+                    <input type="text" class="form-control" [(ngModel)]="b1.value" [value]="b1.value | number: '1.0-2'" (change)="convert('b1')">
+                </div>
+                <div class="col-3">
+                    <div ngbDropdown class="d-inline-block">
+                        <button type="button" class="btn btn-light" id="dropdown1" ngbDropdownToggle>{{b1.type}}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdown1">
+                            <button 
+                                ngbDropdownItem 
+                                *ngFor="let item of currencyList" 
+                                aria-disabled="true" 
+                                (click)="b1.type = item; convert('b1')">
+                                    {{item}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="icon">                
+                <i-bs name="arrow-left-right" width="35" height="35"></i-bs>
+            </div>
+        </div>
+        <div class="col-5 to">
+            <div class="row">
+                <div class="col-9">
+                    <input type="text" class="form-control" [(ngModel)]="b2.value"  [value]="b2.value | number: '1.0-2'" (change)="convert('b2')">
+                </div>
+                <div class="col-3">
+                    <div ngbDropdown class="d-inline-block">
+                        <button type="button" class="btn btn-light" id="dropdown2" ngbDropdownToggle>{{b2.type}}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdown2">
+                            <button 
+                                ngbDropdownItem 
+                                *ngFor="let item of currencyList" 
+                                aria-disabled="true" 
+                                (click)="b2.type = item; convert('b2')">
+                                    {{item}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row convert-history">
+        <div class="comvert-history-header">            
+            <h6>Convert history</h6>
+        </div>
+        <div class="convert-history-body">
+            <p *ngFor="let item of convertHistory; index as i">{{i+1}}. {{item.amount | number: '1.0-2'}} <span>{{item.fromCurrency}} -></span> {{item.convertedAmount | number: '1.0-2'}} <span>{{item.toCurrency}}</span></p>
+        </div>
+     </div>
+</div>
