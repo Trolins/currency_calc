@@ -1,4 +1,5 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CurrentData } from '../models/currencyExchange.model';
 
 @Component({
   selector: 'header-data',
@@ -6,5 +7,5 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   styleUrl: './header-data.component.scss'
 })
 export class HeaderDataComponent {
-  @Input() actualData!: any;
+  @Input() actualData: CurrentData = new CurrentData;
 }

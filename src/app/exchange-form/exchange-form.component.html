@@ -8,7 +8,7 @@
         <div class="col-5 from">
             <div class="row">
                 <div class="col-9">                
-                    <input type="text" class="form-control" [(ngModel)]="b1.value" [value]="b1.value | number: '1.0-2'" (change)="convert('b1')">
+                    <input type="text" class="form-control" [(ngModel)]="b1.value" [value]="b1.value" (change)="convert('b1')">
                 </div>
                 <div class="col-3">
                     <div ngbDropdown class="d-inline-block">
@@ -34,7 +34,7 @@
         <div class="col-5 to">
             <div class="row">
                 <div class="col-9">
-                    <input type="text" class="form-control" [(ngModel)]="b2.value"  [value]="b2.value | number: '1.0-2'" (change)="convert('b2')">
+                    <input type="text" class="form-control" [(ngModel)]="b2.value"  [value]="b2.value" (change)="convert('b2')">
                 </div>
                 <div class="col-3">
                     <div ngbDropdown class="d-inline-block">

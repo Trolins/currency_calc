@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CurrentData, Exchange, HistoryForm } from '../models/currencyExchange.model';
 
 @Component({
   selector: 'exchange-form',
@@ -6,34 +7,34 @@ import { Component, Input } from '@angular/core';
   styleUrl: './exchange-form.component.scss'
 })
 export class ExchangeFormComponent {
-  @Input({ required: true }) actualData!: any;
+  @Input() actualData: CurrentData = new CurrentData;
 
   currencyList:string[] = ['UAH', 'USD', 'EUR'];
-  convertHistory:any[] = [];
-  b1: any = {
-    type: 'UAH',
-    value: 0
-  }
-  b2: any = {
-    type: 'UAH',
-    value: 0
-  }
+  convertHistory:HistoryForm[] = [];
+  b1: Exchange = {
+    value: 0,
+    type: 'UAH'
+  };
+  b2: Exchange = {
+    value: 0,
+    type: 'USD'
+  };
 
   constructor() {}
 
   convert(b:string) {
     switch (b) {
       case 'b1':    
-        this.b2.value = this.convertCurrency(this.b1.value, this.b1.type, this.b2.type);   
+        this.b2.value = Number(this.convertCurrency(this.b1.value, this.b1.type, this.b2.type));   
         break;
       case 'b2': 
-        this.b1.value = this.convertCurrency(this.b2.value, this.b2.type, this.b1.type); 
+        this.b1.value = Number(this.convertCurrency(this.b2.value, this.b2.type, this.b1.type)); 
         break;
     }   
     
   }
   
-  convertCurrency(amount:number, fromCurrency:any, toCurrency:any) { 
+  convertCurrency(amount:number, fromCurrency:string, toCurrency:string) { 
     const exchangeRate = this.getExchangeRate(fromCurrency, toCurrency); 
     const convertedAmount = exchangeRate * amount;
     let temp = {
@@ -47,7 +48,7 @@ export class ExchangeFormComponent {
   } 
    
   getExchangeRate(fromCurrency:string, toCurrency:string) { 
-    const exchangeRates = this.actualData.rates;
+    const exchangeRates = this.actualData.rates;    
     return exchangeRates[toCurrency] / exchangeRates[fromCurrency]; 
   } 
 }

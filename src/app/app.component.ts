@@ -1,29 +1,25 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GetCurrencyDataService } from './services/get-currency-data.service';
+import { CurrentData } from './models/currencyExchange.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  data: any;
+export class AppComponent implements OnInit {
+  data: CurrentData = new CurrentData;
+  subscription: Subscription = new Subscription;
   constructor(
     private currencyService: GetCurrencyDataService,
     ) { }
 
-  ngOnInit(changes: SimpleChanges): void {
-    this.getCurrency();
+  ngOnInit(): void {
+    this.subscription = this.currencyService.getCurrentCurrency().subscribe(res => {this.data = res}, (error) => { console.log(error) })
   }
-
-  getCurrency() {
-    this.currencyService.GetCurrentCurrency().subscribe(
-      res => {
-        this.data = res;
-      },
-      error => {
-      }
-    )
-  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+}
 
 }

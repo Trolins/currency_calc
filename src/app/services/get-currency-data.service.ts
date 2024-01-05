@@ -8,10 +8,15 @@ import { Observable } from 'rxjs';
 export class GetCurrencyDataService {  
   APIkey = 'YrlUHhhugbzaxUVlOkZiITpHy5cAHJTJ';
   URL = 'https://api.currencybeacon.com/v1/latest';
+  APIparams = {
+    api_key: this.APIkey,
+    base: 'USD',
+    symbols: 'UAH,EUR,USD'
+  };
     
   constructor(private http: HttpClient) { }
 
-  GetCurrentCurrency(): Observable<any> {
-    return this.http.get(this.URL+'?api_key='+this.APIkey+'&base=USD&symbols=UAH,EUR,USD');
+  getCurrentCurrency(): Observable<any> {
+    return this.http.get(this.URL, {params:this.APIparams});
   }
 }
